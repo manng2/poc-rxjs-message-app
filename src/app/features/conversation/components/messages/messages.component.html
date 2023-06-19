@@ -1,0 +1,12 @@
+<div>
+  <h1>Messages</h1>
+  <p routerLink="/conversations">Back</p>
+  <input [formControl]="inputControl" />
+
+  <section>
+    <ul *ngIf="messages$ | async as messages">
+      <li *ngFor="let message of messages">{{message.content}}</li>
+    </ul>
+  </section>
+</div>
+

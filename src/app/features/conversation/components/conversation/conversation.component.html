@@ -1,0 +1,8 @@
+<div>
+  <h1>Conversations</h1>
+  <ul *ngIf="conversations$ | async as conversations">
+    <li *ngFor="let conversation of conversations" [routerLink]="conversation.id">
+      {{conversation.id}} (Click here to see messages)
+    </li>
+  </ul>
+</div>

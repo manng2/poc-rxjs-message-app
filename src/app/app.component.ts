@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, bufferTime, combineLatest, debounceTime, distinctUntilChanged, interval, map, Observable, Subject, switchMap, take, tap } from 'rxjs';
+import { bufferTime, combineLatest, distinctUntilChanged, map, Observable, take } from 'rxjs';
 
-import { SAMPLE_MESSAGES, SAMPLE_CONVERSATIONS, SAMPLE_THEMES } from './constants/sample-data.constant';
+import { SAMPLE_THEMES } from './constants/sample-data.constant';
 import { AppService } from './services/app.service';
 
 @Component({
@@ -12,11 +12,7 @@ import { AppService } from './services/app.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
-  private readonly innerMessages$ = new BehaviorSubject<MessageModel[]>(SAMPLE_MESSAGES);
-
-  public readonly messages$ = this.innerMessages$.asObservable();
   public readonly isUserLoggedIn$!: Observable<boolean>;
-  public readonly inputControl = new FormControl();
   public readonly themeControl = new FormControl();
   public readonly theme$ = this.appService.getTheme();
   public readonly themeOptions = SAMPLE_THEMES;
@@ -30,9 +26,15 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.listenUserLoggedIn();
-    this.listenInputChange();
     this.loadTheme();
     this.listenThemeChange();
+
+    // List of numbers
+    this.getListNumbers().subscribe({
+      next: (numbers) => {
+        // Do something with your numbers
+      }
+    })
   }
 
   private listenUserLoggedIn(): void {
@@ -45,17 +47,6 @@ export class AppComponent implements OnInit {
         }
       },
     });
-  }
-
-  private listenInputChange(): void {
-    this.inputControl.valueChanges.pipe(
-      debounceTime(400),
-      switchMap(this.appService.searchMessages)
-    ).subscribe({
-      next: (messages) => {
-        this.innerMessages$.next(messages);
-      }
-    })
   }
 
   private getListNumbers(): Observable<number[]> {

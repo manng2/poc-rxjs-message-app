@@ -46,12 +46,6 @@ export class AppService {
     return myNumber$.asObservable();
   }
 
-  public searchMessages(keyword: string): Observable<MessageModel[]> {
-    return of(SAMPLE_MESSAGES).pipe(
-      map(messages => messages.filter(it => it.content.toLowerCase().includes(keyword.toLowerCase())))
-    )
-  }
-
   public getTheme(): Observable<AppThemeModel> {
     return this.appStore.theme$
   }

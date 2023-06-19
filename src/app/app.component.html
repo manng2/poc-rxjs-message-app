@@ -1,20 +1,27 @@
-<router-outlet></router-outlet>
+<header>
+  <nav>
+    <ul>
+      <li routerLink="/">Home</li>
+      <li routerLink="conversations">Conversations</li>
+    </ul>
+  </nav>
+</header>
 
 <div>
-  <input [formControl]="inputControl" />
-  <section *ngIf="messages$ | async as messages">
-    <ul>
-      <li *ngFor="let message of messages">{{ message.content }}</li>
-    </ul>
+  <p *ngIf="isUserLoggedIn$ | async">User is online and logged in 🟢</p>
+  <p *ngIf="!(isUserLoggedIn$ | async)">User is offline and logged out 🔴</p>
+
+  <section *ngIf="theme$ | async as theme">
+    <label for="themes">🎨 Choose a theme:</label>
+
+    <select [formControl]="themeControl" name="themes" id="themes">
+      <option *ngFor="let theme of themeOptions" [value]="theme.value">{{theme.label}}</option>
+    </select>
+
+    <p>You are choosing theme: {{ theme }}</p>
   </section>
 </div>
 
-<section *ngIf="theme$ | async as theme">
-  <label for="themes">Choose a theme:</label>
+<hr/>
 
-  <select [formControl]="themeControl" name="themes" id="themes">
-    <option *ngFor="let theme of themeOptions" [value]="theme.value">{{theme.label}}</option>
-  </select>
-
-  <p>You are choosing theme: {{ theme }}</p>
-</section>
+<router-outlet></router-outlet>

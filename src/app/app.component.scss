@@ -1,0 +1,12 @@
+nav {
+  ul {
+    display: flex;
+    gap: 36px;
+
+    li {
+      background-color: aqua;
+      padding: 16px;
+      cursor: pointer;
+    }
+  }
+}

@@ -4,26 +4,26 @@ export const SAMPLE_MESSAGES: MessageModel[] = [
   {
     id: '123',
     content: 'Hello em',
-    conversationId: '1'
+    conversationId: 'x-aozpxl312x-x0xa'
   },
   {
     id: '124',
     content: 'ABC',
-    conversationId: '2'
+    conversationId: 'x3xz-smk2sao-xzop'
   },
   {
     id: '121',
     content: 'Alo alo',
-    conversationId: '1'
+    conversationId: 'x-aozpxl312x-x0xa'
   }
 ]
 
 export const SAMPLE_CONVERSATIONS: ConversationModel[] = [
   {
-    id: '1'
+    id: 'x-aozpxl312x-x0xa'
   },
   {
-    id: '2'
+    id: 'x3xz-smk2sao-xzop'
   }
 ]
 
